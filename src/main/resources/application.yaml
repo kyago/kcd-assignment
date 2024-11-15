@@ -1,0 +1,47 @@
+server:
+  port: 8080
+  shutdown: graceful
+
+spring:
+  application:
+    name: kcd-assignment
+  sql:
+    init:
+      platform: postgresql
+      schema-locations: classpath:schema.sql
+      mode: always
+  jpa:
+    open-in-view: false
+
+springdoc:
+  api-docs:
+    enabled: true
+    groups:
+      enabled: true
+    path: /v3/api-docs
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html
+  group-configs:
+    - group: order
+      paths-to-match:
+        - /orders/**
+      packages-to-scan: com.kcd.assignment.order
+
+    - group: product
+      paths-to-match:
+        - /products/**
+      packages-to-scan: com.kcd.assignment.product
+  info:
+    order:
+      title: Order API Documentation
+      description: Order API
+      version: '1.0'
+
+    product:
+      title: Product API Documentation
+      description: Product API
+      version: '1.0'
+  default-consumes-media-type: application/json
+  default-produces-media-type: application/json
+  packages-to-scan: com.kcd.assignment
