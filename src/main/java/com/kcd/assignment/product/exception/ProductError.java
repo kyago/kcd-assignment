@@ -4,6 +4,9 @@ public enum ProductError {
     PRODUCT_NOT_FOUND("PRODUCT-001", "해당 상품을 찾을 수 없습니다."),
     PRODUCT_NAME_ALREADY_EXIST("PRODUCT-002", "이미 존재하는 상품명입니다."),
     PRODUCT_OPTION_GROUP_MINIMUM_SELECT_COUNT_GREATER_THAN_MAXIMUM_SELECT_COUNT("PRODUCT-003", "옵션 그룹의 최소 선택 개수가 최대 선택 개수보다 큽니다."),
+    PRODUCT_SOLD_OUT("PRODUCT-004", "해당 상품은 품절되었습니다."),
+    PRODUCT_DELETED("PRODUCT-005", "해당 상품은 삭제되었습니다."),
+
 
     PRODUCT_CATEGORY_NOT_FOUND("PRODUCT_CATEGORY-001", "해당 카테고리를 찾을 수 없습니다."),
     PRODUCT_CATEGORY_NAME_ALREADY_EXIST("PRODUCT_CATEGORY-002", "이미 존재하는 카테고리입니다."),

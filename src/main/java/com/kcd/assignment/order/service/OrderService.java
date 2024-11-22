@@ -7,6 +7,7 @@ import com.kcd.assignment.order.entity.Order;
 import com.kcd.assignment.order.exception.OrderError;
 import com.kcd.assignment.order.exception.OrderException;
 import com.kcd.assignment.order.repository.OrderRepository;
+import com.kcd.assignment.product.service.ProductValidationService;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.web.PagedModel;
 import org.springframework.stereotype.Service;
@@ -18,9 +19,11 @@ import java.util.List;
 @Service
 public class OrderService {
     private final OrderRepository orderRepository;
+    private final ProductValidationService productValidationService;
 
-    public OrderService(OrderRepository orderRepository) {
+    public OrderService(OrderRepository orderRepository, ProductValidationService productValidationService) {
         this.orderRepository = orderRepository;
+        this.productValidationService = productValidationService;
     }
 
     @Transactional(readOnly = true)
@@ -39,6 +42,10 @@ public class OrderService {
     }
 
     public String createOrder(Order newOrder) {
+        newOrder.getOrderItems().forEach(orderItem -> {
+            productValidationService.validateProduct(orderItem.getProductId());
+        });
+
         Order order = orderRepository.save(newOrder);
 
         return HashIdUtils.encodeShort(order.getId());
